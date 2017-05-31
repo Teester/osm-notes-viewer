@@ -39,6 +39,7 @@
             background-color: #f2f2f2;
             padding-left: 50px;
             font-size: 14px;
+            color: #454545;
         }
 
         .user {
@@ -51,6 +52,30 @@
             text-align: left;
             background-color: #4CAF50;
             color: white;
+        }
+        
+        .commented {
+            color:white;
+            background-color: #504CAF;
+            border-radius: 25px;
+            padding: 3px;
+            font-size: 10px;
+        }
+
+        .closed {
+            color:white;
+            background-color: #AF504C;
+            border-radius: 25px;
+            padding: 3px;
+           	font-size: 10px;
+        }
+
+        .reopened {
+            color:white;
+            background-color: #4CAF50;
+            border-radius: 25px;
+            padding: 3px;
+           	font-size: 10px;
         }
 
         #mapid { height:400px; }
@@ -151,12 +176,15 @@
                     txt += "<td>" + (Object.keys(data.features[x].properties.comments).length -1) + "</td>";
                   } else {
                     var st2 = data.features[x].properties.comments[comment].date; 
-                    var dt2 = new Date(st2.replace(pattern,"$1-$2-$3 $4:$5:$6"));       
-                    txt += "</tr><tr class='subcomment' id ='" + data.features[x].properties.id + "'><td>⤷</td><td>" + dt2.toLocaleDateString() + "</td><td>" + data.features[x].properties.comments[comment].html + "</td>";
+                    var dt2 = new Date(st2.replace(pattern,"$1-$2-$3 $4:$5:$6"));  
+                    txt += "</tr><tr class='subcomment' id ='" + data.features[x].properties.id + "'>";
+                    txt+= "<td><span class='" + data.features[x].properties.comments[comment].action + "'>" + data.features[x].properties.comments[comment].action +"</span></td>";
+                    txt += "<td>" + dt2.toLocaleDateString() + "</td>";
+                    txt += "<td>" + data.features[x].properties.comments[comment].html + "</td>";
                     if (data.features[x].properties.comments[comment].user) {
-                      txt += "<td class='user'><a href=" + data.features[x].properties.comments[comment].user_url + ">" + data.features[x].properties.comments[comment].user + "</a></td><td/></tr><tr>";
+                      txt += "<td class='user'><a href=" + data.features[x].properties.comments[comment].user_url + ">" + data.features[x].properties.comments[comment].user + "</a></td><td/>";
                     } else {
-                      txt += "<td>anonymous</td>";
+                      txt += "<td>anonymous</td><td/>";
                     }
                   }
                 }
