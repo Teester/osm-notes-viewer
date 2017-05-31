@@ -161,7 +161,7 @@
             
             for (var x in data.features) {
                 coordinates=data.features[x].geometry.coordinates;
-                txt += "<tr class='toplevel' id ='" + data.features[x].properties.id + "'><td><a href=http://www.openstreetmap.org/note/" + data.features[x].properties.id + ">" + data.features[x].properties.id + "</a></td>";
+                txt += "<tr class='toplevel' id ='" + data.features[x].properties.id + "'><td><a href=https://www.openstreetmap.org/note/" + data.features[x].properties.id + ">" + data.features[x].properties.id + "</a></td>";
                 var st = data.features[x].properties.comments[0].date; 
                 var dt = new Date(st.replace(pattern,"$1-$2-$3 $4:$5:$6"));       
                 txt += "<td>" + dt.toLocaleDateString() + "</td>";
@@ -192,7 +192,7 @@
                 
                 var latLng = new L.latLng([coordinates[1], coordinates[0]]);                
                 var myMarker = new L.marker(latLng);                
-                myMarker.bindPopup("Note " + data.features[x].properties.id + "<br/>" + data.features[x].properties.comments[0].html);
+                myMarker.bindPopup("<a href='https://www.openstreetmap.org/note/" + data.features[x].properties.id + "'>Note " + data.features[x].properties.id + "</a><br/>" + data.features[x].properties.comments[0].html);
                 marker.push(myMarker);
                 mymap.addLayer(marker[x]);
             }
